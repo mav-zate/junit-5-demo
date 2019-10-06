@@ -108,7 +108,7 @@ public class ConcurrencyTest {
                 this.getClass().getName(),
                 endTime,
                 duration));
-            System.out.println(String.format("%s used %d threads in execution",
+            System.out.println(String.format("%s used %d threads in execution\n",
                 this.getClass().getName(),
                 speedyGonzalesThreads.size()));
         }
