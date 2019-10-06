@@ -13,7 +13,7 @@ import org.junit.jupiter.api.parallel.Execution;
 import static org.junit.jupiter.api.parallel.ExecutionMode.CONCURRENT;
 import static org.junit.jupiter.api.parallel.ExecutionMode.SAME_THREAD;
 
-public class ConcurrencyTest {
+public class ConcurrencyDemo {
     Set<Thread> slowpokeThreads;
     Set<Thread> speedyGonzalesThreads;
 

@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 
-public class LegibilityTest {
+public class LegibilityDemo {
     @Nested
     @DisplayName("Showcase of Display Name Annotation")
     class DisplayNameAnnotation {

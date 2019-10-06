@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 import java.time.Duration;
 import org.junit.jupiter.api.Test;
 
-public class AssertionsTest {
+public class AssertionsDemo {
 
     @Test
     void assertionSignatures() {
