@@ -13,6 +13,7 @@ import org.junit.jupiter.api.parallel.Execution;
 import static org.junit.jupiter.api.parallel.ExecutionMode.CONCURRENT;
 import static org.junit.jupiter.api.parallel.ExecutionMode.SAME_THREAD;
 
+@Execution(CONCURRENT)
 public class ConcurrencyDemo {
     Set<Thread> slowpokeThreads;
     Set<Thread> speedyGonzalesThreads;
@@ -60,7 +61,7 @@ public class ConcurrencyDemo {
                 this.getClass().getName(),
                 endTime,
                 duration));
-            System.out.println(String.format("%s used %d threads in execution",
+            System.out.println(String.format("%s used %d threads in execution\n",
                 this.getClass().getName(),
                 slowpokeThreads.size()));
         }
