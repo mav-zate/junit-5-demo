@@ -18,14 +18,6 @@ import org.junit.jupiter.api.Test;
 public class AssertionsDemo {
 
     @Test
-    void assertionSignatures() {
-        // Each assertion has at least three signatures:
-        assertEquals(2, 1 + 1); // expected && actual
-        assertEquals(4, 2 + 2, "two plus two is four"); // expected, actual && message
-        assertEquals(3, 4 - 1, () -> "minus one that's three, quick maths"); // expected, actual && lazy loaded message
-    }
-
-    @Test
     void assertionRepertoire() {
         // Structural Equality
         assertEquals(2, 2);
@@ -57,6 +49,14 @@ public class AssertionsDemo {
         }
 
         fail(() -> " and here's why but lazier...");
+    }
+
+    @Test
+    void assertionSignatures() {
+        // Each assertion has at least three signatures:
+        assertEquals(2, 1 + 1); // expected && actual
+        assertEquals(4, 2 + 2, "two plus two is four"); // expected, actual && message
+        assertEquals(3, 4 - 1, () -> "minus one that's three, quick maths"); // expected, actual && lazy loaded message
     }
 
     @Test
