@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.DynamicContainer.dynamicContainer;
 import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 
 import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
@@ -56,17 +55,14 @@ public class DynamicTestDemo {
         testSubject = new SampleController();
 
         Class<?> classOfTestSubject = testSubject.getClass();
-        Collection<Method> publicMethods = Arrays.stream(classOfTestSubject.getMethods())
-            .filter(method -> {
-                int modifiers = method.getModifiers();
-                String methodName = method.getName();
-                return Modifier.isPublic(modifiers) && methodName.contains("Route");
-            }).collect(Collectors.toList());
+        Collection<Method> routes = Arrays.stream(classOfTestSubject.getMethods())
+            .filter(method -> method.getAnnotation(Path.class) != null)
+            .collect(Collectors.toList());
 
         return dynamicContainer(
             "All routes should return 200 status code upon success",
-            publicMethods.stream().map(method -> dynamicTest(method.getName(), () -> {
-                    Response response = (Response) method.invoke(testSubject);
+            routes.stream().map(route -> dynamicTest(route.getName(), () -> {
+                    Response response = (Response) route.invoke(testSubject); // testSubject.firstSampleRoute();
                     assertEquals(200, response.getStatus());
                 })).collect(Collectors.toList()));
     }
