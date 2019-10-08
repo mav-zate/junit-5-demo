@@ -1,7 +1,5 @@
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Nested;
@@ -14,9 +12,7 @@ import static org.junit.jupiter.api.parallel.ExecutionMode.CONCURRENT;
 import static org.junit.jupiter.api.parallel.ExecutionMode.SAME_THREAD;
 
 @Execution(CONCURRENT)
-public class ConcurrencyDemo {
-    Set<Thread> slowpokeThreads;
-    Set<Thread> speedyGonzalesThreads;
+public class ConcurrencyDemo { // todo: remove thread count
 
     @Nested
     @Execution(SAME_THREAD)
@@ -28,7 +24,6 @@ public class ConcurrencyDemo {
         @BeforeAll
         public void init() {
             startTime = LocalDateTime.now();
-            slowpokeThreads = new HashSet<>();
             System.out.println(String.format("Starting tests for %s at %s",
                 this.getClass().getName(),
                 startTime));
@@ -36,34 +31,27 @@ public class ConcurrencyDemo {
 
         @Test
         public void testOne() throws InterruptedException {
-            slowpokeThreads.add(Thread.currentThread());
             Thread.sleep(10_000);
         }
 
         @Test
         public void testTwo() throws InterruptedException {
-            slowpokeThreads.add(Thread.currentThread());
             Thread.sleep(10_000);
         }
 
         @Test
         public void testThree() throws InterruptedException {
-            slowpokeThreads.add(Thread.currentThread());
             Thread.sleep(10_000);
-
         }
 
         @AfterAll
         public void cleanUp() {
             endTime = LocalDateTime.now();
             String duration = Utils.durationFormatter(Duration.between(startTime, endTime).toString());
-            System.out.println(String.format("Finished tests for %s at %s for a total duration of %s seconds",
+            System.out.println(String.format("Finished tests for %s at %s for a total duration of %s seconds\n",
                 this.getClass().getName(),
                 endTime,
                 duration));
-            System.out.println(String.format("%s used %d threads in execution\n",
-                this.getClass().getName(),
-                slowpokeThreads.size()));
         }
     }
 
@@ -77,7 +65,6 @@ public class ConcurrencyDemo {
         @BeforeAll
         public void init() {
             startTime = LocalDateTime.now();
-            speedyGonzalesThreads = new HashSet<>();
             System.out.println(String.format("Starting tests for %s at %s",
                 this.getClass().getName(),
                 startTime));
@@ -85,19 +72,16 @@ public class ConcurrencyDemo {
 
         @Test
         public void testOne() throws InterruptedException {
-            speedyGonzalesThreads.add(Thread.currentThread());
             Thread.sleep(10_000);
         }
 
         @Test
         public void testTwo() throws InterruptedException {
-            speedyGonzalesThreads.add(Thread.currentThread());
             Thread.sleep(10_000);
         }
 
         @Test
         public void testThree() throws InterruptedException {
-            speedyGonzalesThreads.add(Thread.currentThread());
             Thread.sleep(10_000);
         }
 
@@ -105,13 +89,10 @@ public class ConcurrencyDemo {
         public void cleanUp() {
             endTime = LocalDateTime.now();
             String duration = Utils.durationFormatter(Duration.between(startTime, endTime).toString());
-            System.out.println(String.format("Finished tests for %s at %s for a total duration of %s seconds",
+            System.out.println(String.format("Finished tests for %s at %s for a total duration of %s seconds\n",
                 this.getClass().getName(),
                 endTime,
                 duration));
-            System.out.println(String.format("%s used %d threads in execution\n",
-                this.getClass().getName(),
-                speedyGonzalesThreads.size()));
         }
     }
 }
