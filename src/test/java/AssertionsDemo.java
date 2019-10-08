@@ -88,33 +88,6 @@ public class AssertionsDemo {
     }
 
     @Test
-    void dependentAssertions() {
-        assertAll("Two Groupings of Assertions",
-            // First Grouping
-            () -> {
-                String notAString = Utils.thisMethodAlwaysReturnsNull();
-                assertNotNull(notAString);
-
-                // Dependent on first assertion so will not run
-                String alsoNotAString = Utils.thisMethodAlwaysReturnsNull();
-                String nope = Utils.thisMethodAlwaysReturnsNull();
-                assertAll(
-                    () -> assertNotNull(alsoNotAString),
-                    () -> assertNotNull(nope)
-                );
-            },
-            // Second Grouping
-            () -> {
-                // Completely independent of previous group
-                String definitelyAString = Utils.thisMethodActuallyReturnsAString();
-
-                assertNotNull(definitelyAString);
-                System.out.println("This grouping passed independent of the first one");
-            }
-        );
-    }
-
-    @Test
     void exceptionsTesting() {
         assertAll(
             () -> assertThrows(Exception.class, Utils::expectNoException), // fails
