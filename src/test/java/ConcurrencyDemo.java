@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.parallel.ExecutionMode.CONCURRENT;
 import static org.junit.jupiter.api.parallel.ExecutionMode.SAME_THREAD;
 
 @Execution(CONCURRENT)
-public class ConcurrencyDemo { // todo: remove thread count
+public class ConcurrencyDemo {
 
     @Nested
     @Execution(SAME_THREAD)
